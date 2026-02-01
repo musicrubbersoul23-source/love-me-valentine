@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Me Valentine</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            width: 350px;
+            min-height: 400px;
+        }
+        img { width: 180px; margin-bottom: 20px; border-radius: 10px; }
+        h1 { font-size: 24px; color: #333; margin-bottom: 30px; }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease; /* Makes it slide smoothly like the video */
+        }
+        #yesBtn { background-color: #ff4d6d; color: white; }
+        #noBtn { 
+            background-color: #f8f9fa; 
+            color: #333; 
+            position: absolute; /* Needed for the jumping effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainBox">
+        <img id="displayGif" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif">
+        <h1 id="questionText">Do you love me?</h1>
+        <div class="btn-container">
+            <button class="btn" id="yesBtn" onclick="handleYes()">Yes</button>
+            <button class="btn" id="noBtn" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">No</button>
+        </div>
+    </div>
 
+    <script>
+        function moveNoButton() {
+            const box = document.getElementById('mainBox');
+            const noBtn = document.getElementById('noBtn');
+            
+            // Boundary math to keep the button inside the white card
+            const maxX = box.clientWidth - noBtn.offsetWidth - 20;
+            const maxY = box.clientHeight - noBtn.offsetHeight - 20;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function handleYes() {
+            document.getElementById('questionText').innerHTML = "I knew it! 😍";
+            document.getElementById('displayGif').src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndW1yZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZzVqbm9pZHF4ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KztT2c4u8mYYUiMKdJ/giphy.gif";
+            document.getElementById('noBtn').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
